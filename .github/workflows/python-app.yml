@@ -16,14 +16,14 @@ jobs:
       - name: Deploy to master folder
         run: rsync -avz --exclude={.git,.github} ./ /home/ubuntu/fastapi_task_manager/
       - name: Navigate to root directory
-        run: cd /home/ubuntu/fastapi_task_manager/
+        run: cd /home/ubuntu/fastapi_task_manager
       - name: Install venv
         run: python3 -m venv venv
-        #ajusta path
+        #ajusta path and install requeriments
       - name: using venv
         run: | 
           source venv/bin/activate
-          echo PATH=$PATH >> $GITHUB_ENV
-        #install requeriments
-      - name: Install requeriments
-        run:  pip install -r requirements.txt
+          pip install -r requirements.txt
+        #desactivate venv
+      - name: Deactivate venv
+        run: deactivate
