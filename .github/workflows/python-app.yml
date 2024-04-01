@@ -24,6 +24,3 @@ jobs:
         run: | 
           source venv/bin/activate
           pip install -r requirements.txt
-        #desactivate venv
-      - name: Deactivate venv
-        run: deactivate
