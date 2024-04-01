@@ -12,8 +12,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: main
+        #Deploy
+      - name: Deploy to master folder
+        run: rsync -avz --exclude={.git,.github} ./ /home/ubuntu/fastapi_task_manager/
       - name: Navigate to root directory
-        run: cd /
+        run: cd /home/ubuntu/fastapi_task_manager/
       - name: Install venv
         run: python3 -m venv venv
         #ajusta path
@@ -24,6 +27,3 @@ jobs:
         #install requeriments
       - name: Install requeriments
         run:  pip install -r requirements.txt
-        #Deploy
-      - name: Deploy to master folder
-        run: rsync -avz --exclude={.git,.github} ./ /home/ubuntu/fastapi_task_manager/
