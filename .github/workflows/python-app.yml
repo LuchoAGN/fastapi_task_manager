@@ -1,0 +1,29 @@
+name: Deploy Saferut
+#main
+on:
+  push:
+    branches: [ "main" ]
+      
+jobs:   
+  deploy_ovh_primary:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Navigate to root directory
+        run: cd /
+      - name: Install venv
+        run: python3 -m venv venv
+        #ajusta path
+      - name: using venv
+        run: | 
+          source venv/bin/activate
+          echo PATH=$PATH >> $GITHUB_ENV
+        #install requeriments
+      - name: Install requeriments
+        run:  pip install -r requirements.txt
+        #Deploy
+      - name: Deploy to master folder
+        run: rsync -avz --exclude={.git,.github} ./ /home/ubuntu/fastapi_task_manager/
