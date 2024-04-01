@@ -1,5 +1,5 @@
 name: Deploy Saferut
-#main
+#main-
 on:
   push:
     branches: [ "main" ]
